@@ -1,0 +1,57 @@
+<?php
+
+namespace mediathequeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Emprunt
+ *
+ * @ORM\Table(name="emprunt", indexes={@ORM\Index(name="ouvrage_id", columns={"ouvrage_id"})})
+ * @ORM\Entity
+ */
+class Emprunt
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=200, nullable=false)
+     */
+    private $titre;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_retour", type="date", nullable=false)
+     */
+    private $dateRetour;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_emprunt", type="date", nullable=false)
+     */
+    private $dateEmprunt;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \mediathequeBundle\Entity\Ouvrage
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Ouvrage")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="ouvrage_id", referencedColumnName="id")
+     * })
+     */
+    private $ouvrage;
+
+
+}
+

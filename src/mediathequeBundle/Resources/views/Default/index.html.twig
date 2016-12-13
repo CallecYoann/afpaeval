@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+
+
+        <style>
+
+            body  {
+                margin:0;
+                padding:0;
+            }
+
+            .centerpanel {
+                display:flex;
+                align-items: center;
+            }
+
+            .left{
+                margin: auto;
+            }
+
+            .right {
+                margin: auto;
+
+            }
+
+            .navbar {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #333;
+            }
+
+            li {
+                float: left;
+                
+            }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 14px;
+                text-decoration: none;
+                
+            }
+
+            li a:hover {
+                background-color: #111;
+            }
+
+            .active {
+                background-color: #FFBB0F;
+                color: black;
+            }
+            
+        </style>
+
+    </head>
+
+    <body>
+
+
+        <div class="centerpanel">
+            <div class="left">
+                <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
+            </div> 
+
+            <div class="right">
+                <h1>Médiathèque de Pleyber-Christ</h1>
+            </div>
+        </div>
+
+        <ul class="navbar">
+            <li><a class="active" href="#home">Accueil</a></li>
+            <li><a href="#news">Réservation</a></li>
+            <li><a href="#contact">Documents</a></li>
+            <li><a href="#about">Contact</a></li>
+        </ul>
+
+
+
+
+    </body>
+</html>	 
+

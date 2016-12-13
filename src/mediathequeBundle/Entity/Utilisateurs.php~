@@ -1,0 +1,60 @@
+<?php
+
+namespace mediathequeBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Utilisateurs
+ *
+ * @ORM\Table(name="utilisateurs", indexes={@ORM\Index(name="emprunt_id", columns={"emprunt_id"}), @ORM\Index(name="reservation_id", columns={"reservation_id"})})
+ * @ORM\Entity
+ */
+class Utilisateurs
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=250, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prenom", type="string", length=250, nullable=false)
+     */
+    private $prenom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \mediathequeBundle\Entity\Emprunt
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Emprunt")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="emprunt_id", referencedColumnName="id")
+     * })
+     */
+    private $emprunt;
+
+    /**
+     * @var \mediathequeBundle\Entity\Reservation
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Reservation")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="reservation_id", referencedColumnName="id")
+     * })
+     */
+    private $reservation;
+
+
+}
+

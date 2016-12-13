@@ -1,0 +1,12 @@
+mediatheque_ouvrage:
+    resource: "@mediathequeBundle/Controller/OuvrageController.php"
+    type:     annotation
+
+mediatheque:
+    resource: "@mediathequeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
