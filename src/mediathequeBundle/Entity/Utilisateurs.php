@@ -2,6 +2,7 @@
 
 namespace mediathequeBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,8 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="utilisateurs", indexes={@ORM\Index(name="emprunt_id", columns={"emprunt_id"}), @ORM\Index(name="reservation_id", columns={"reservation_id"})})
  * @ORM\Entity
  */
-class Utilisateurs
+class Utilisateurs extends BaseUser 
 {
+
     /**
      * @var string
      *
@@ -33,7 +35,12 @@ class Utilisateurs
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
+
+    public function __construct() {
+        parent::__construct();
+        // your own logic
+    }
 
     /**
      * @var \mediathequeBundle\Entity\Emprunt
@@ -55,8 +62,6 @@ class Utilisateurs
      */
     private $reservation;
 
-
-
     /**
      * Set nom
      *
@@ -64,8 +69,7 @@ class Utilisateurs
      *
      * @return Utilisateurs
      */
-    public function setNom($nom)
-    {
+    public function setNom($nom) {
         $this->nom = $nom;
 
         return $this;
@@ -76,8 +80,7 @@ class Utilisateurs
      *
      * @return string
      */
-    public function getNom()
-    {
+    public function getNom() {
         return $this->nom;
     }
 
@@ -88,8 +91,7 @@ class Utilisateurs
      *
      * @return Utilisateurs
      */
-    public function setPrenom($prenom)
-    {
+    public function setPrenom($prenom) {
         $this->prenom = $prenom;
 
         return $this;
@@ -100,8 +102,7 @@ class Utilisateurs
      *
      * @return string
      */
-    public function getPrenom()
-    {
+    public function getPrenom() {
         return $this->prenom;
     }
 
@@ -110,8 +111,7 @@ class Utilisateurs
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -122,8 +122,7 @@ class Utilisateurs
      *
      * @return Utilisateurs
      */
-    public function setEmprunt(\mediathequeBundle\Entity\Emprunt $emprunt = null)
-    {
+    public function setEmprunt(\mediathequeBundle\Entity\Emprunt $emprunt = null) {
         $this->emprunt = $emprunt;
 
         return $this;
@@ -134,8 +133,7 @@ class Utilisateurs
      *
      * @return \mediathequeBundle\Entity\Emprunt
      */
-    public function getEmprunt()
-    {
+    public function getEmprunt() {
         return $this->emprunt;
     }
 
@@ -146,8 +144,7 @@ class Utilisateurs
      *
      * @return Utilisateurs
      */
-    public function setReservation(\mediathequeBundle\Entity\Reservation $reservation = null)
-    {
+    public function setReservation(\mediathequeBundle\Entity\Reservation $reservation = null) {
         $this->reservation = $reservation;
 
         return $this;
@@ -158,8 +155,8 @@ class Utilisateurs
      *
      * @return \mediathequeBundle\Entity\Reservation
      */
-    public function getReservation()
-    {
+    public function getReservation() {
         return $this->reservation;
     }
+
 }

@@ -5,29 +5,29 @@ namespace mediathequeBundle\Controller;
 use mediathequeBundle\Entity\Ouvrage;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Ouvrage controller.
  *
  * @Route("ouvrage")
  */
-class OuvrageController extends Controller
-{
+class OuvrageController extends Controller {
+
     /**
      * Lists all ouvrage entities.
      *
      * @Route("/", name="ouvrage_index")
      * @Method("GET")
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getManager();
 
         $ouvrages = $em->getRepository('mediathequeBundle:Ouvrage')->findAll();
 
         return $this->render('ouvrage/index.html.twig', array(
-            'ouvrages' => $ouvrages,
+                    'ouvrages' => $ouvrages,
         ));
     }
 
@@ -37,8 +37,7 @@ class OuvrageController extends Controller
      * @Route("/new", name="ouvrage_new")
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
-    {
+    public function newAction(Request $request) {
         $ouvrage = new Ouvrage();
         $form = $this->createForm('mediathequeBundle\Form\OuvrageType', $ouvrage);
         $form->handleRequest($request);
@@ -52,8 +51,8 @@ class OuvrageController extends Controller
         }
 
         return $this->render('ouvrage/new.html.twig', array(
-            'ouvrage' => $ouvrage,
-            'form' => $form->createView(),
+                    'ouvrage' => $ouvrage,
+                    'form' => $form->createView(),
         ));
     }
 
@@ -63,13 +62,12 @@ class OuvrageController extends Controller
      * @Route("/{id}", name="ouvrage_show")
      * @Method("GET")
      */
-    public function showAction(Ouvrage $ouvrage)
-    {
+    public function showAction(Ouvrage $ouvrage) {
         $deleteForm = $this->createDeleteForm($ouvrage);
 
         return $this->render('ouvrage/show.html.twig', array(
-            'ouvrage' => $ouvrage,
-            'delete_form' => $deleteForm->createView(),
+                    'ouvrage' => $ouvrage,
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -79,8 +77,7 @@ class OuvrageController extends Controller
      * @Route("/{id}/edit", name="ouvrage_edit")
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Ouvrage $ouvrage)
-    {
+    public function editAction(Request $request, Ouvrage $ouvrage) {
         $deleteForm = $this->createDeleteForm($ouvrage);
         $editForm = $this->createForm('mediathequeBundle\Form\OuvrageType', $ouvrage);
         $editForm->handleRequest($request);
@@ -92,9 +89,9 @@ class OuvrageController extends Controller
         }
 
         return $this->render('ouvrage/edit.html.twig', array(
-            'ouvrage' => $ouvrage,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+                    'ouvrage' => $ouvrage,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -104,8 +101,7 @@ class OuvrageController extends Controller
      * @Route("/{id}", name="ouvrage_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, Ouvrage $ouvrage)
-    {
+    public function deleteAction(Request $request, Ouvrage $ouvrage) {
         $form = $this->createDeleteForm($ouvrage);
         $form->handleRequest($request);
 
@@ -125,12 +121,14 @@ class OuvrageController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Ouvrage $ouvrage)
-    {
+    private function createDeleteForm(Ouvrage $ouvrage) {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('ouvrage_delete', array('id' => $ouvrage->getId())))
-            ->setMethod('DELETE')
-            ->getForm()
+                        ->setAction($this->generateUrl('ouvrage_delete', array('id' => $ouvrage->getId())))
+                        ->setMethod('DELETE')
+                        ->getForm()
         ;
     }
+
+    
+
 }

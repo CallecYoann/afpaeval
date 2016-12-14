@@ -3,11 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<div class="centerpanel">
+    <div class="left">
+        <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
+    </div> 
+
+    <div class="right">
+        <h1>Médiathèque de Pleyber-Christ</h1>
+    </div>
+</div>
+
+{#<footer class="footer">
+    <p>Posted by: Callec Yoann</p>
+    <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
+    <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
+</footer>#}
+
+<body>
+{% block body %}{% endblock %}
+{% block javascripts %}{% endblock %}
+</body>
 </html>
