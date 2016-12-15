@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+    <div class="conteneur">
+        <div class="newsbd"
+             <h3>Nouvelles BD :</h3><br><br>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Année</th>
+                        <th>Date d'entrée à la médiathèque</th>
+                        <th>Réserver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ouvrage_bd in ouvrages_bd %}
+                        <tr>
+                            <td>{{ ouvrage_bd.ouvrage.titre }}</td>
+                            <td>{{ ouvrage_bd.ouvrage.annee }}</td>
+                            <td>{% if ouvrage_bd.ouvrage.date %}{{ ouvrage_bd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><button type="submit" src="{{ ouvrage_bd.ouvrage.id }}">OK</button></td>
+                        </tr>
+                    {% endfor %}   
+                </tbody>
+            </table>
+        </div><br>
+
+        <div class="newscd"
+             <h3>Nouveaux CD:</h3><br><br>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Année</th>
+                        <th>Date d'entrée à la médiathèque</th>
+                        <th>Réserver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ouvrage_cd in ouvrages_cd %}
+                        <tr>
+                            <td>{{ ouvrage_cd.ouvrage.titre }}</td>
+                            <td>{{ ouvrage_cd.ouvrage.annee }}</td>
+                            <td>{% if ouvrage_cd.ouvrage.date %}{{ ouvrage_cd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><button type="submit" src="{{ ouvrage_cd.ouvrage.id }}">OK</button></td>
+                        </tr>
+                    {% endfor %}   
+                </tbody>
+            </table>
+        </div><br>
+
+        <div class="newslivre"
+             <h3>Nouveaux Livres :</h3><br><br>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Année</th>
+                        <th>Date d'entrée à la médiathèque</th>
+                        <th>Réserver</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ouvrage_livre in ouvrages_livre %}
+                        <tr>
+                            <td>{{ ouvrage_livre.ouvrage.titre }}</td>
+                            <td>{{ ouvrage_livre.ouvrage.annee }}</td>
+                            <td>{% if ouvrage_livre.ouvrage.date %}{{ ouvrage_livre.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><a href ="{{ path("mediatheque_reservation",  {'id': ouvrage_livre.ouvrage.id })}}">OK</td>
+                           {# <td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
+                        </tr>
+                    {% endfor %}   
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+{% endblock %}

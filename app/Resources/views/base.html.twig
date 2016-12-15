@@ -3,28 +3,58 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
+        <link rel="stylesheet" href="css/base.css" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
 
-<div class="centerpanel">
-    <div class="left">
-        <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
-    </div> 
+    
 
-    <div class="right">
-        <h1>Médiathèque de Pleyber-Christ</h1>
+    <body>
+        
+        <div class="centerpanel">
+        <div class="left">
+            <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
+        </div> 
+
+        <div class="right">
+            <h1>Médiathèque de Pleyber-Christ</h1>
+        </div>
     </div>
-</div>
 
-{#<footer class="footer">
-    <p>Posted by: Callec Yoann</p>
-    <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
-    <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
-</footer>#}
 
-<body>
-{% block body %}{% endblock %}
+    <nav class="navbar">
+        <div class="container-fluid"
+             <ul>
+                <li><a class="active" href="{{path("mediatheque_homepage")}}">Accueil</a></li>
+                <li><a href="#reservation">Réservation</a></li>
+                <li><a href="{{path("mediatheque_nouveaute")}}">Nouveautés</a></li>
+                <li><a href="#evenements">Evenements</a></li>
+                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <li><a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></li>
+                    {% else %}
+                    <li><a href="register"> S'inscrire</a></li>
+                    <li><a href="#">Se connecter</a></li>
+                    <div>
+                        <form action="{{ path("fos_user_security_check") }}" method="post">
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                            <label for="username"><input class="usernameinput" type="text" id="username" name="_username" placeholder="Utilisateur" required="required" size="8"></label>
+                            <label for="password"><input type="password" id="password" name="_password" placeholder="Mot de passe" required="required" size="8"></label>
+                            <label for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" value="on" hidden></label>
+                            <button type="submit" id="_submit" name="_submit""><span></span>Ok</button>
+                        </form>
+                    </div>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav><br>
+
+    <footer class="footer">
+        <p>Posted by: Callec Yoann</p>
+        <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
+        <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
+    </footer>
+    {% block body %}{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>
