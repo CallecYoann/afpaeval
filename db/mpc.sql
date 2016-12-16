@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 13, 2016 at 05:00 PM
+-- Generation Time: Dec 16, 2016 at 12:02 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -28,8 +28,15 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bd` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) NOT NULL
+  `ouvrage_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bd`
+--
+
+INSERT INTO `bd` (`id`, `ouvrage_id`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -39,8 +46,16 @@ CREATE TABLE `bd` (
 
 CREATE TABLE `cd` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) NOT NULL
+  `ouvrage_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cd`
+--
+
+INSERT INTO `cd` (`id`, `ouvrage_id`) VALUES
+(1, 6),
+(2, 7);
 
 -- --------------------------------------------------------
 
@@ -51,7 +66,7 @@ CREATE TABLE `cd` (
 CREATE TABLE `emprunt` (
   `id` int(11) NOT NULL,
   `titre` varchar(200) NOT NULL,
-  `ouvrage_id` int(11) NOT NULL,
+  `ouvrage_id` int(11) DEFAULT NULL,
   `date_retour` date NOT NULL,
   `date_emprunt` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,8 +79,16 @@ CREATE TABLE `emprunt` (
 
 CREATE TABLE `livre` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) NOT NULL
+  `ouvrage_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `livre`
+--
+
+INSERT INTO `livre` (`id`, `ouvrage_id`) VALUES
+(1, 4),
+(2, 8);
 
 -- --------------------------------------------------------
 
@@ -85,7 +108,12 @@ CREATE TABLE `ouvrage` (
 --
 
 INSERT INTO `ouvrage` (`id`, `titre`, `annee`, `date`) VALUES
-(1, 'asterix', 1999, '2016-12-08');
+(1, 'asterix', 1999, '2016-12-08'),
+(2, 'La Bible', 154, '2016-12-14'),
+(4, 'Les Misérables', 1862, '2016-12-14'),
+(6, 'Cyborg Nekfeu', 2016, '2016-12-14'),
+(7, 'Demi Portion - 2chezmoi', 2016, '2016-12-15'),
+(8, 'e-penser - Bruce Benaram', 2015, '2016-12-15');
 
 -- --------------------------------------------------------
 
@@ -95,9 +123,17 @@ INSERT INTO `ouvrage` (`id`, `titre`, `annee`, `date`) VALUES
 
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
-  `date` date NOT NULL,
-  `ouvrage_id` int(11) NOT NULL
+  `date` date DEFAULT NULL,
+  `ouvrage_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `date`, `ouvrage_id`) VALUES
+(1, '2016-12-15', 4),
+(2, '2016-12-16', 8);
 
 -- --------------------------------------------------------
 
@@ -107,11 +143,29 @@ CREATE TABLE `reservation` (
 
 CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
-  `nom` varchar(250) NOT NULL,
-  `prenom` varchar(250) NOT NULL,
-  `emprunt_id` int(11) NOT NULL,
-  `reservation_id` int(11) NOT NULL
+  `nom` varchar(250) DEFAULT NULL,
+  `prenom` varchar(250) DEFAULT NULL,
+  `emprunt_id` int(11) DEFAULT NULL,
+  `reservation_id` int(11) DEFAULT NULL,
+  `username` varchar(180) NOT NULL,
+  `username_canonical` varchar(180) NOT NULL,
+  `email` varchar(180) NOT NULL,
+  `email_canonical` varchar(180) NOT NULL,
+  `enabled` tinyint(1) NOT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `confirmation_token` varchar(180) DEFAULT NULL,
+  `password_requested_at` datetime DEFAULT NULL,
+  `roles` longtext NOT NULL COMMENT '(DC2Type:array)'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `utilisateurs`
+--
+
+INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `emprunt_id`, `reservation_id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
+(1, NULL, NULL, NULL, NULL, 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-15 11:16:06', NULL, NULL, 'a:0:{}');
 
 --
 -- Indexes for dumped tables
@@ -164,6 +218,9 @@ ALTER TABLE `reservation`
 --
 ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_497B315E92FC23A8` (`username_canonical`),
+  ADD UNIQUE KEY `UNIQ_497B315EA0D96FBF` (`email_canonical`),
+  ADD UNIQUE KEY `UNIQ_497B315EC05FB297` (`confirmation_token`),
   ADD KEY `emprunt_id` (`emprunt_id`),
   ADD KEY `reservation_id` (`reservation_id`);
 
@@ -175,12 +232,12 @@ ALTER TABLE `utilisateurs`
 -- AUTO_INCREMENT for table `bd`
 --
 ALTER TABLE `bd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cd`
 --
 ALTER TABLE `cd`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `emprunt`
 --
@@ -190,22 +247,22 @@ ALTER TABLE `emprunt`
 -- AUTO_INCREMENT for table `livre`
 --
 ALTER TABLE `livre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `ouvrage`
 --
 ALTER TABLE `ouvrage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
@@ -214,38 +271,38 @@ ALTER TABLE `utilisateurs`
 -- Constraints for table `bd`
 --
 ALTER TABLE `bd`
-  ADD CONSTRAINT `bd_ibfk_1` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_5CCDBE9B15D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
 
 --
 -- Constraints for table `cd`
 --
 ALTER TABLE `cd`
-  ADD CONSTRAINT `cd_ibfk_1` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_45D68FDA15D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
 
 --
 -- Constraints for table `emprunt`
 --
 ALTER TABLE `emprunt`
-  ADD CONSTRAINT `ouvrage_id` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_364071D715D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
 
 --
 -- Constraints for table `livre`
 --
 ALTER TABLE `livre`
-  ADD CONSTRAINT `livre_ibfk_1` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_AC634F9915D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
 
 --
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_42C8495515D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
 
 --
 -- Constraints for table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  ADD CONSTRAINT `utilisateurs_ibfk_1` FOREIGN KEY (`emprunt_id`) REFERENCES `emprunt` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `utilisateurs_ibfk_2` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_497B315EAE7FEF94` FOREIGN KEY (`emprunt_id`) REFERENCES `emprunt` (`id`),
+  ADD CONSTRAINT `FK_497B315EB83297E7` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
