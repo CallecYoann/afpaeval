@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+    <div class="conteneurresa">
+        <div class="resa">
+            <h3>Liste des réservations :</h3><br><br>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for id in ids %}
+                        <tr>
+                            <td>{{ id.id }}</td>
+                            <td>{{ id.ouvrage.titre }}</td>
+                        </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>   
+
+{% endblock %}

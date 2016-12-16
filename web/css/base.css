@@ -74,7 +74,7 @@ html {
             padding: 0 0 80px;
         }
 
-        .newsbd, .newslivre, .newscd {
+        .newsbd, .newslivre, .newscd, .resa {
             text-align: center;
             margin: auto;
         }
@@ -101,3 +101,11 @@ html {
             text-align: center;
             font-size: 0.8em;
         }
+        
+        .conteneurresa {
+            width: 80%;
+            margin: 0 auto;
+            padding: 0 0 80px;
+        }
+        
+       

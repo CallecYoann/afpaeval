@@ -4,7 +4,7 @@ mediatheque_homepage:
     
 mediatheque_nouveaute:
     path:    /nouveaute
-    defaults: { _controller: mediathequeBundle:Default:listebd }
+    defaults: { _controller: mediathequeBundle:Default:listenouveaute }
     
 mediatheque_evenements:
     path:    /evenements
@@ -12,3 +12,7 @@ mediatheque_evenements:
 mediatheque_reservation:
     path:    /reservation
     defaults: {_controller: mediathequeBundle:Default:reservation }
+    
+mediatheque_listereservation:    
+    path:    /listeresa
+    defaults: {_controller: mediathequeBundle:Default:listeReservation }

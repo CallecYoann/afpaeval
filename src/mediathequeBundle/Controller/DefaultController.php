@@ -16,41 +16,22 @@ class DefaultController extends Controller {
         return $this->render('mediathequeBundle:Default:index.html.twig', array('Ouvrages' => $ouvrages));
     }
 
-    public function listebdAction() {
+    public function listenouveauteAction() {
         $em = $this->getDoctrine()->getManager();
 
-        $repobd = $em->getRepository('mediathequeBundle:Bd');
+        $repobds = $em->getRepository('mediathequeBundle:Bd')->findAll();
 
-        $qbbd = $repobd->createQueryBuilder('b')
-                ->join('b.ouvrage', 'o')
-                ->where('b.ouvrage = o.id');
+        $repocds = $em->getRepository('mediathequeBundle:Cd')->findAll();
 
-        $ouvrages_bd = $qbbd->getQuery()->getResult();
+        $repolivres = $em->getRepository('mediathequeBundle:Livre')->findAll();
 
-        $repocd = $em->getRepository('mediathequeBundle:Cd');
-
-        $qbcd = $repocd->createQueryBuilder('c')
-                ->join('c.ouvrage', 'o')
-                ->where('c.ouvrage = o.id');
-
-        $ouvrages_cd = $qbcd->getQuery()->getResult();
-
-        $repolivre = $em->getRepository('mediathequeBundle:Livre');
-
-        $qblivre = $repolivre->createQueryBuilder('l')
-                ->join('l.ouvrage', 'o')
-                ->where('l.ouvrage = o.id');
-
-        $ouvrages_livre = $qblivre->getQuery()->getResult();
-
-
-        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('ouvrages_bd' => $ouvrages_bd, 'ouvrages_cd' => $ouvrages_cd, 'ouvrages_livre' => $ouvrages_livre,
+        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('repobds' => $repobds, 'repocds' => $repocds, 'repolivres' => $repolivres,
         ));
     }
 
     public function reservationAction(Request $request) {
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager(); //connexion à la base de donnée
         $actual_date = new \DateTime();
         $ouvrage_id=$request->get('id'); //on récupère l'id de l'URL et on l'affecte à une variable. | Ici le chiffre 4.
         
@@ -65,7 +46,18 @@ class DefaultController extends Controller {
         
         $em->flush();
         
+//        $id = $em->getRepository('mediathequeBundle:Reservation')->findAll();
+        
         return $this->render('mediathequeBundle:Default:reservation.html.twig');
     }
 
+    public function listeReservationAction() {
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        $ids = $em->getRepository('mediathequeBundle:Reservation')->findAll();
+        
+        return $this->render('mediathequeBundle:Default:listeresa.html.twig', array('ids' => $ids));
+    }
+    
 }

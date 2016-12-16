@@ -18,12 +18,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ouvrage_bd in ouvrages_bd %}
+                    {% for repobd in repobds %}
                         <tr>
-                            <td>{{ ouvrage_bd.ouvrage.titre }}</td>
-                            <td>{{ ouvrage_bd.ouvrage.annee }}</td>
-                            <td>{% if ouvrage_bd.ouvrage.date %}{{ ouvrage_bd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><button type="submit" src="{{ ouvrage_bd.ouvrage.id }}">OK</button></td>
+                            <td>{{repobd.ouvrage.titre }}</td>
+                            <td>{{ repobd.ouvrage.annee }}</td>
+                            <td>{% if repobd.ouvrage.date %}{{ repobd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><button type="submit" src="{{ repobd.ouvrage.id }}">OK</button></td>
                         </tr>
                     {% endfor %}   
                 </tbody>
@@ -43,12 +43,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ouvrage_cd in ouvrages_cd %}
+                    {% for repocd in repocds %}
                         <tr>
-                            <td>{{ ouvrage_cd.ouvrage.titre }}</td>
-                            <td>{{ ouvrage_cd.ouvrage.annee }}</td>
-                            <td>{% if ouvrage_cd.ouvrage.date %}{{ ouvrage_cd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><button type="submit" src="{{ ouvrage_cd.ouvrage.id }}">OK</button></td>
+                            <td>{{ repocd.ouvrage.titre }}</td>
+                            <td>{{ repocd.ouvrage.annee }}</td>
+                            <td>{% if repocd.ouvrage.date %}{{ repocd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><button type="submit" src="{{ repocd.ouvrage.id }}">OK</button></td>
                         </tr>
                     {% endfor %}   
                 </tbody>
@@ -68,12 +68,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for ouvrage_livre in ouvrages_livre %}
+                    {% for repolivre in repolivres %}
                         <tr>
-                            <td>{{ ouvrage_livre.ouvrage.titre }}</td>
-                            <td>{{ ouvrage_livre.ouvrage.annee }}</td>
-                            <td>{% if ouvrage_livre.ouvrage.date %}{{ ouvrage_livre.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><a href ="{{ path("mediatheque_reservation",  {'id': ouvrage_livre.ouvrage.id })}}">OK</td>
+                            <td>{{ repolivre.ouvrage.titre }}</td>
+                            <td>{{ repolivre.ouvrage.annee }}</td>
+                            <td>{% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
+                            <td><a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">OK</td>
                            {# <td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
                         </tr>
                     {% endfor %}   

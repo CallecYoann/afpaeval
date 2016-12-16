@@ -11,6 +11,7 @@
 
     <body>
         
+        <header>
         <div class="centerpanel">
         <div class="left">
             <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
@@ -20,19 +21,18 @@
             <h1>Médiathèque de Pleyber-Christ</h1>
         </div>
     </div>
-
+        </header>
 
     <nav class="navbar">
         <div class="container-fluid"
              <ul>
                 <li><a class="active" href="{{path("mediatheque_homepage")}}">Accueil</a></li>
-                <li><a href="#reservation">Réservation</a></li>
+                <li><a href="{{path("mediatheque_listereservation")}}">Réservation</a></li>
                 <li><a href="{{path("mediatheque_nouveaute")}}">Nouveautés</a></li>
                 <li><a href="#evenements">Evenements</a></li>
                     {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <li><a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></li>
                     {% else %}
-                    <li><a href="register"> S'inscrire</a></li>
                     <li><a href="#">Se connecter</a></li>
                     <div>
                         <form action="{{ path("fos_user_security_check") }}" method="post">
