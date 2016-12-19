@@ -1,18 +1,18 @@
 mediatheque_homepage:
     path:     /
     defaults: { _controller: mediathequeBundle:Default:index }
-    
+
 mediatheque_nouveaute:
     path:    /nouveaute
     defaults: { _controller: mediathequeBundle:Default:listenouveaute }
-    
+
 mediatheque_evenements:
     path:    /evenements
-    
+
 mediatheque_reservation:
     path:    /reservation
     defaults: {_controller: mediathequeBundle:Default:reservation }
-    
-mediatheque_listereservation:    
+
+mediatheque_listereservation:
     path:    /listeresa
     defaults: {_controller: mediathequeBundle:Default:listeReservation }

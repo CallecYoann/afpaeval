@@ -2,38 +2,31 @@
 <html>
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="css/base.css" type="text/css" />
+        <link rel="stylesheet" href="css/base.css"/>
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
 
-    
-
     <body>
-        
-        <header>
-        <div class="centerpanel">
-        <div class="left">
-            <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
-        </div> 
+        <div class="wrapper">
 
-        <div class="right">
-            <h1>Médiathèque de Pleyber-Christ</h1>
-        </div>
-    </div>
+
+        <header>
+          <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
         </header>
 
-    <nav class="navbar">
-        <div class="container-fluid"
+    <nav>
              <ul>
-                <li><a class="active" href="{{path("mediatheque_homepage")}}">Accueil</a></li>
-                <li><a href="{{path("mediatheque_listereservation")}}">Réservation</a></li>
-                <li><a href="{{path("mediatheque_nouveaute")}}">Nouveautés</a></li>
-                <li><a href="#evenements">Evenements</a></li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <li><a href="{{ path('fos_user_security_logout') }}">Se déconnecter</a></li>
+                <a href="{{path("mediatheque_homepage")}}"><li>Accueil</li></a>
+                <a href="{{path("mediatheque_listereservation")}}"><li>Réservation</li></a>
+                <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
+                <a href="#evenements"><li>Evenements</li></a>
+                    <!-- {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
                     {% else %}
-                    <li><a href="#">Se connecter</a></li>
+                    <a href="#"><li>Se connecter</li></a>
                     <div>
                         <form action="{{ path("fos_user_security_check") }}" method="post">
                             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -43,18 +36,34 @@
                             <button type="submit" id="_submit" name="_submit""><span></span>Ok</button>
                         </form>
                     </div>
-                    </li>
-                {% endif %}
+                {% endif %} -->
             </ul>
-        </div>
-    </nav><br>
+          <div class="handle">Menu</div>
+    </nav>
 
-    <footer class="footer">
+    </div>
+
+
+
+
+    <!-- <footer class="footer">
         <p>Posted by: Callec Yoann</p>
         <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
         <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
-    </footer>
+    </footer> -->
     {% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+
+    <footer>
+      <p>Posted by: Callec Yoann</p>
+      <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
+      <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
+    </footer>
+{% block javascripts %}
+<script>
+  $('.handle').on('click', function(){
+    $('nav ul').toggleClass('showing');
+  });
+</script>
+{% endblock %}
 </body>
 </html>
