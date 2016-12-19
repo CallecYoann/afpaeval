@@ -17,14 +17,14 @@ class Utilisateurs extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=250, nullable=false)
+     * @ORM\Column(name="nom", type="string", length=250, nullable=true)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=250, nullable=false)
+     * @ORM\Column(name="prenom", type="string", length=250, nullable=true)
      */
     private $prenom;
 

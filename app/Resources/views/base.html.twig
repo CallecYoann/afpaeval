@@ -13,57 +13,80 @@
         <div class="wrapper">
 
 
-        <header>
-          <img src="{{ asset('bundles/mediatheque/images/logo.png') }}" alt="tutodidacte" />
-        </header>
+            <header>
+                <img src="{{ asset('bundles/mediatheque/images/logo1.png') }}" alt="tutodidacte" />
+            </header>
 
-    <nav>
-             <ul>
-                <a href="{{path("mediatheque_homepage")}}"><li>Accueil</li></a>
-                <a href="{{path("mediatheque_listereservation")}}"><li>Réservation</li></a>
-                <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
-                <a href="#evenements"><li>Evenements</li></a>
-                    <!-- {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                    <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
-                    {% else %}
-                    <a href="#"><li>Se connecter</li></a>
-                    <div>
-                        <form action="{{ path("fos_user_security_check") }}" method="post">
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                            <label for="username"><input class="usernameinput" type="text" id="username" name="_username" placeholder="Utilisateur" required="required" size="8"></label>
-                            <label for="password"><input type="password" id="password" name="_password" placeholder="Mot de passe" required="required" size="8"></label>
-                            <label for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" value="on" hidden></label>
-                            <button type="submit" id="_submit" name="_submit""><span></span>Ok</button>
-                        </form>
-                    </div>
-                {% endif %} -->
-            </ul>
-          <div class="handle">Menu</div>
-    </nav>
+            <nav>
+                <ul>
+                    <a href="{{path("mediatheque_homepage")}}"><li>Accueil</li></a>
+                    <a href="{{path("mediatheque_listereservation")}}"><li>Réservation</li></a>
+                    <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
+                    <a href="#evenements"><li>Evenements</li></a>
+                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                        <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
+                        <p>Bienvenue {{loggedUser}}</p>
+                            {% else %}
+                        <a href="#" id="connexionLink"><li>Se connecter</li></a>
+                        <div id=modalConnexion class="modal">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <form action="{{ path("fos_user_security_check") }}" method="post">
+                                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    <label for="username"><input class="usernameinput" type="text" id="username" name="_username" placeholder="Utilisateur" required="required" size="8"></label>
+                                    <label for="password"><input type="password" id="password" name="_password" placeholder="Mot de passe" required="required" size="8"></label>
+                                    <label for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" value="on" hidden></label>
+                                    <button type="submit" id="_submit" name="_submit""><span></span>Ok</button>
+                                </form>
+                            </div>
+                        </div>
+                    {% endif %} 
+                </ul>
+                <div class="handle">Menu</div>
+            </nav>
 
-    </div>
+        </div>
 
 
-
-
-    <!-- <footer class="footer">
-        <p>Posted by: Callec Yoann</p>
-        <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
-        <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
-    </footer> -->
     {% block body %}{% endblock %}
 
     <footer>
-      <p>Posted by: Callec Yoann</p>
-      <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
-      <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
+        <p>Posted by: Callec Yoann</p>
+        <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
+        <p>Tél : 02 98 78 41 67 | Mail : pleyber.christ-mairie@wanadoo.fr</p>
     </footer>
-{% block javascripts %}
-<script>
-  $('.handle').on('click', function(){
-    $('nav ul').toggleClass('showing');
-  });
-</script>
-{% endblock %}
+    {% block javascripts %}
+        <script>
+
+            //Responsive navigation menu for mobile.
+            $('.handle').on('click', function () {
+                $('nav ul').toggleClass('showing');
+            });
+
+            </script>
+
+            <script>
+                
+            //Connexion modal window 
+            var modal = document.getElementById('modalConnexion');
+            var link = document.getElementById("connexionLink");
+            var span = document.getElementsByClassName("close")[0];
+
+            link.onclick = function () {
+                modal.style.display = "block";
+            };
+
+            span.onclick = function () {
+                modal.style.display = "none";
+            };
+
+            window.onclick = function (event) {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+        </script>
+    {% endblock %}
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 16, 2016 at 12:02 PM
+-- Generation Time: Dec 19, 2016 at 04:55 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -28,15 +28,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bd` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) DEFAULT NULL
+  `ouvrage_id` int(11) DEFAULT NULL,
+  `image` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `bd`
 --
 
-INSERT INTO `bd` (`id`, `ouvrage_id`) VALUES
-(1, 1);
+INSERT INTO `bd` (`id`, `ouvrage_id`, `image`) VALUES
+(1, 1, 'image/asterix-bretons.jpg');
 
 -- --------------------------------------------------------
 
@@ -46,16 +47,18 @@ INSERT INTO `bd` (`id`, `ouvrage_id`) VALUES
 
 CREATE TABLE `cd` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) DEFAULT NULL
+  `ouvrage_id` int(11) DEFAULT NULL,
+  `image` varchar(250) NOT NULL,
+  `artiste` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `cd`
 --
 
-INSERT INTO `cd` (`id`, `ouvrage_id`) VALUES
-(1, 6),
-(2, 7);
+INSERT INTO `cd` (`id`, `ouvrage_id`, `image`, `artiste`) VALUES
+(1, 6, 'image/nekfeu-cyborg.jpg', 'Nekfeu'),
+(2, 7, 'image/2chezmoi.jpg', 'Demi Portion');
 
 -- --------------------------------------------------------
 
@@ -79,16 +82,18 @@ CREATE TABLE `emprunt` (
 
 CREATE TABLE `livre` (
   `id` int(11) NOT NULL,
-  `ouvrage_id` int(11) DEFAULT NULL
+  `ouvrage_id` int(11) DEFAULT NULL,
+  `image` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `livre`
 --
 
-INSERT INTO `livre` (`id`, `ouvrage_id`) VALUES
-(1, 4),
-(2, 8);
+INSERT INTO `livre` (`id`, `ouvrage_id`, `image`) VALUES
+(1, 4, 'image/les-miserables.jpg'),
+(2, 8, 'image/e-penser.jpg'),
+(3, 2, 'image/bible.jpg');
 
 -- --------------------------------------------------------
 
@@ -108,11 +113,11 @@ CREATE TABLE `ouvrage` (
 --
 
 INSERT INTO `ouvrage` (`id`, `titre`, `annee`, `date`) VALUES
-(1, 'asterix', 1999, '2016-12-08'),
+(1, 'Asterix chez les bretons', 1966, '2016-12-08'),
 (2, 'La Bible', 154, '2016-12-14'),
 (4, 'Les Misérables', 1862, '2016-12-14'),
-(6, 'Cyborg Nekfeu', 2016, '2016-12-14'),
-(7, 'Demi Portion - 2chezmoi', 2016, '2016-12-15'),
+(6, 'Cyborg', 2016, '2016-12-14'),
+(7, '2chezmoi', 2016, '2016-12-15'),
 (8, 'e-penser - Bruce Benaram', 2015, '2016-12-15');
 
 -- --------------------------------------------------------
@@ -123,7 +128,7 @@ INSERT INTO `ouvrage` (`id`, `titre`, `annee`, `date`) VALUES
 
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
-  `date` date DEFAULT NULL,
+  `date` date NOT NULL,
   `ouvrage_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -165,7 +170,7 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `emprunt_id`, `reservation_id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, NULL, NULL, NULL, NULL, 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-15 11:16:06', NULL, NULL, 'a:0:{}');
+(1, 'bababa', 'bababa', NULL, NULL, 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-19 15:51:11', NULL, NULL, 'a:0:{}');
 
 --
 -- Indexes for dumped tables
@@ -247,7 +252,7 @@ ALTER TABLE `emprunt`
 -- AUTO_INCREMENT for table `livre`
 --
 ALTER TABLE `livre`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `ouvrage`
 --
@@ -257,7 +262,7 @@ ALTER TABLE `ouvrage`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `utilisateurs`
 --

@@ -4,83 +4,62 @@
 
 {% block body %}
 
-    <div class="conteneur">
-        <div class="newsbd"
-             <h3>Nouvelles BD :</h3><br><br>
+    <div class="conteneur" >
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Année</th>
-                        <th>Date d'entrée à la médiathèque</th>
-                        <th>Réserver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repobd in repobds %}
-                        <tr>
-                            <td>{{repobd.ouvrage.titre }}</td>
-                            <td>{{ repobd.ouvrage.annee }}</td>
-                            <td>{% if repobd.ouvrage.date %}{{ repobd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><button type="submit" src="{{ repobd.ouvrage.id }}">OK</button></td>
-                        </tr>
-                    {% endfor %}   
-                </tbody>
-            </table>
-        </div><br>
+        <h3 class="BDh3">Nouvelles BD :</h3><br><br>
 
-        <div class="newscd"
-             <h3>Nouveaux CD:</h3><br><br>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Année</th>
-                        <th>Date d'entrée à la médiathèque</th>
-                        <th>Réserver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repocd in repocds %}
-                        <tr>
-                            <td>{{ repocd.ouvrage.titre }}</td>
-                            <td>{{ repocd.ouvrage.annee }}</td>
-                            <td>{% if repocd.ouvrage.date %}{{ repocd.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><button type="submit" src="{{ repocd.ouvrage.id }}">OK</button></td>
-                        </tr>
-                    {% endfor %}   
-                </tbody>
-            </table>
-        </div><br>
-
-        <div class="newslivre"
-             <h3>Nouveaux Livres :</h3><br><br>
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Année</th>
-                        <th>Date d'entrée à la médiathèque</th>
-                        <th>Réserver</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for repolivre in repolivres %}
-                        <tr>
-                            <td>{{ repolivre.ouvrage.titre }}</td>
-                            <td>{{ repolivre.ouvrage.annee }}</td>
-                            <td>{% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %}</td> 
-                            <td><a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">OK</td>
-                           {# <td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
-                        </tr>
-                    {% endfor %}   
-                </tbody>
-            </table>
+        <div class="newsbd">
+            {% for repobd in repobds %}
+                <div class="wrapperBD">
+                    <div class="imageleft"><img src="{{ repobd.image }}" height="190" width="150"></i></div>
+                    <div class="inforight">
+                        <p>Titre : {{repobd.ouvrage.titre }}</p>
+                        <p>Année : {{ repobd.ouvrage.annee }}</p>
+                        <p>Date d'entrée médiathèque : {% if repobd.ouvrage.date %}{{ repobd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
+                        <button type="submit" src="{{ repobd.ouvrage.id }}">Réserver</button>
+                    </div>
+                {% endfor %}   
+            </div>
         </div>
 
+
+
+
+    </div><br>
+
+    <h3 class="CDh3">Nouveaux CD:</h3><br><br>
+
+    <div class="newscd">
+        {% for repocd in repocds %}
+            <div class="wrapperCD">   
+                <div class="imageleft"><img src="{{ repocd.image }}" height="150" width="150"></i></div>
+                <div class="inforight">
+                    <p>Titre : {{ repocd.ouvrage.titre }}</p>
+                    <p>Artiste : {{ repocd.artiste }}</p>
+                    <p>Année : {{ repocd.ouvrage.annee }}</p>
+                    <p>Date d'entrée médiathèque : {% if repocd.ouvrage.date %}{{ repocd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
+                    <button type="submit" src="{{ repocd.ouvrage.id }}">Réserver</button>
+                </div>
+            {% endfor %}   
+        </div>
+    </div><br>
+
+    <h3 class="Livreh3">Nouveaux Livres :</h3><br><br>
+
+    <div class="newslivre"
+         {% for repolivre in repolivres %}
+             <div class="wrapperLivre">   
+                 <div class="imageleft"><img src="{{ repolivre.image }}" height="190" width="150"></i></div>
+                 <div class="inforight">
+                     <p>{{ repolivre.ouvrage.titre }}</p>
+                     <p>{{ repolivre.ouvrage.annee }}</p>
+                     <p>Date d'entrée médiathèque : {% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %} </p>
+                     <a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">Réserver</a>
+                         {#<td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
+                 </div>
+             {% endfor %}   
+
+         </div>
     </div>
 
 {% endblock %}

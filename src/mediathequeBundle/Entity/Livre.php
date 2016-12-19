@@ -31,7 +31,12 @@ class Livre
      */
     private $ouvrage;
 
-
+        /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=250, nullable=false)
+     */
+    private $image;
 
     /**
      * Get id
@@ -65,5 +70,29 @@ class Livre
     public function getOuvrage()
     {
         return $this->ouvrage;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Livre
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

@@ -30,8 +30,20 @@ class Cd
      * })
      */
     private $ouvrage;
+    
+        /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=250, nullable=false)
+     */
+    private $image;
 
-
+       /**
+     * @var string
+     *
+     * @ORM\Column(name="artiste", type="string", length=250, nullable=false)
+     */
+    private $artiste;
 
     /**
      * Get id
@@ -65,5 +77,53 @@ class Cd
     public function getOuvrage()
     {
         return $this->ouvrage;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     *
+     * @return Cd
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set artiste
+     *
+     * @param string $artiste
+     *
+     * @return Cd
+     */
+    public function setArtiste($artiste)
+    {
+        $this->artiste = $artiste;
+
+        return $this;
+    }
+
+    /**
+     * Get artiste
+     *
+     * @return string
+     */
+    public function getArtiste()
+    {
+        return $this->artiste;
     }
 }

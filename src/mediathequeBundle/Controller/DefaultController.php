@@ -12,8 +12,10 @@ class DefaultController extends Controller {
         $em = $this->getDoctrine()->getManager();
 
         $ouvrages = $em->getRepository('mediathequeBundle:Ouvrage')->findAll();
+        
+        $loggedUser = $this->getUser();
 
-        return $this->render('mediathequeBundle:Default:index.html.twig', array('Ouvrages' => $ouvrages));
+        return $this->render('mediathequeBundle:Default:index.html.twig', array('Ouvrages' => $ouvrages, 'loggedUser' => $loggedUser));
     }
 
     public function listenouveauteAction() {
@@ -24,8 +26,10 @@ class DefaultController extends Controller {
         $repocds = $em->getRepository('mediathequeBundle:Cd')->findAll();
 
         $repolivres = $em->getRepository('mediathequeBundle:Livre')->findAll();
-
-        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('repobds' => $repobds, 'repocds' => $repocds, 'repolivres' => $repolivres,
+        
+        $loggedUser = $this->getUser();
+        
+        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('repobds' => $repobds, 'repocds' => $repocds, 'repolivres' => $repolivres, 'loggedUser' => $loggedUser
         ));
     }
 
@@ -46,6 +50,7 @@ class DefaultController extends Controller {
         
         $em->flush();
         
+        
 //        $id = $em->getRepository('mediathequeBundle:Reservation')->findAll();
         
         return $this->render('mediathequeBundle:Default:reservation.html.twig');
@@ -57,7 +62,16 @@ class DefaultController extends Controller {
         
         $ids = $em->getRepository('mediathequeBundle:Reservation')->findAll();
         
-        return $this->render('mediathequeBundle:Default:listeresa.html.twig', array('ids' => $ids));
+        $loggedUser = $this->getUser();
+        
+        return $this->render('mediathequeBundle:Default:listeresa.html.twig', array('ids' => $ids, 'loggedUser' => $loggedUser));
     }
     
+    public function reservationEmpruntAction(Request $request) {
+        
+        $em = $this->getDoctrine()->getManager();
+        $actual_date = new \DateTime();
+        
+    }
+
 }
