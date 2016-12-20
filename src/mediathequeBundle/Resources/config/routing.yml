@@ -16,7 +16,11 @@ mediatheque_reservation:
 mediatheque_mesreservations:
     path:    /mesresas
     defaults: {_controller: mediathequeBundle:Default:mesReservations }
-    
-mediatheque_adminspace:   
+
+mediatheque_adminspace:
     path:    /listeresa
     defaults: {_controller: mediathequeBundle:Default:adminListeResa }
+
+mediatheque_confirmemprunt:
+    path:    /confirmemprunt
+    defaults: {_controller: mediathequeBundle:Default:Emprunt }
