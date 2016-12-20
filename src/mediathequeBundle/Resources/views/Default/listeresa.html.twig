@@ -6,20 +6,20 @@
 
     <div class="conteneurresa">
         <div class="resa">
-            <h3>Liste de mes réservations :</h3><br><br>
+            <h3>Liste de mes réservations :</h3><br>
 
             <table>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Titre</th>
+                        <th>Date de réservation</th> 
                     </tr>
                 </thead>
                 <tbody>
-                    {% for id in ids %}
+                    {% for mesreservation in mesreservations %}
                         <tr>
-                            <td>{{ id.id }}</td>
-                            <td>{{ id.ouvrage.titre }}</td>
+                            <td>{{ mesreservation.ouvrage.titre }}</td>
+                            <td>{{mesreservation.date|date('Y-m-d')}}</td>
                         </tr>
                     {% endfor %} 
                 </tbody>

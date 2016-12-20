@@ -6,7 +6,7 @@
 
     <div class="conteneur" >
 
-        <h3 class="BDh3">Nouvelles BD :</h3><br><br>
+        <h3 class="BDh3">Nouvelles BD :</h3>
 
         <div class="newsbd">
             {% for repobd in repobds %}
@@ -16,18 +16,16 @@
                         <p>Titre : {{repobd.ouvrage.titre }}</p>
                         <p>Année : {{ repobd.ouvrage.annee }}</p>
                         <p>Date d'entrée médiathèque : {% if repobd.ouvrage.date %}{{ repobd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
-                        <button type="submit" src="{{ repobd.ouvrage.id }}">Réserver</button>
+                        <a href ="{{ path("mediatheque_reservation",  {'id': repobd.ouvrage.id })}}">--> Réserver <--</a>
                     </div>
+                    
                 {% endfor %}   
             </div>
         </div>
+            
+    
 
-
-
-
-    </div><br>
-
-    <h3 class="CDh3">Nouveaux CD:</h3><br><br>
+    <h3 class="CDh3">Nouveaux CD:</h3>
 
     <div class="newscd">
         {% for repocd in repocds %}
@@ -38,13 +36,14 @@
                     <p>Artiste : {{ repocd.artiste }}</p>
                     <p>Année : {{ repocd.ouvrage.annee }}</p>
                     <p>Date d'entrée médiathèque : {% if repocd.ouvrage.date %}{{ repocd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
-                    <button type="submit" src="{{ repocd.ouvrage.id }}">Réserver</button>
+                    <a href ="{{ path("mediatheque_reservation",  {'id': repocd.ouvrage.id })}}">--> Réserver <--</a>
                 </div>
+                 
             {% endfor %}   
         </div>
-    </div><br>
+    </div>
 
-    <h3 class="Livreh3">Nouveaux Livres :</h3><br><br>
+    <h3 class="Livreh3">Nouveaux Livres :</h3>
 
     <div class="newslivre"
          {% for repolivre in repolivres %}
@@ -54,7 +53,7 @@
                      <p>{{ repolivre.ouvrage.titre }}</p>
                      <p>{{ repolivre.ouvrage.annee }}</p>
                      <p>Date d'entrée médiathèque : {% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %} </p>
-                     <a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">Réserver</a>
+                     <a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">--> Réserver <--  </a>
                          {#<td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
                  </div>
              {% endfor %}   

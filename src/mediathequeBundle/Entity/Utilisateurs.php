@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Utilisateurs
  *
- * @ORM\Table(name="utilisateurs", indexes={@ORM\Index(name="emprunt_id", columns={"emprunt_id"}), @ORM\Index(name="reservation_id", columns={"reservation_id"})})
+ * @ORM\Table(name="utilisateurs")
  * @ORM\Entity
  */
 class Utilisateurs extends BaseUser 
@@ -37,31 +37,17 @@ class Utilisateurs extends BaseUser
      */
     protected $id;
 
+    
+    
+    
     public function __construct() {
         parent::__construct();
         // your own logic
+        
+        
     }
 
-    /**
-     * @var \mediathequeBundle\Entity\Emprunt
-     *
-     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Emprunt")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="emprunt_id", referencedColumnName="id")
-     * })
-     */
-    private $emprunt;
-
-    /**
-     * @var \mediathequeBundle\Entity\Reservation
-     *
-     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Reservation")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="reservation_id", referencedColumnName="id")
-     * })
-     */
-    private $reservation;
-
+ 
     /**
      * Set nom
      *
@@ -115,48 +101,6 @@ class Utilisateurs extends BaseUser
         return $this->id;
     }
 
-    /**
-     * Set emprunt
-     *
-     * @param \mediathequeBundle\Entity\Emprunt $emprunt
-     *
-     * @return Utilisateurs
-     */
-    public function setEmprunt(\mediathequeBundle\Entity\Emprunt $emprunt = null) {
-        $this->emprunt = $emprunt;
 
-        return $this;
-    }
-
-    /**
-     * Get emprunt
-     *
-     * @return \mediathequeBundle\Entity\Emprunt
-     */
-    public function getEmprunt() {
-        return $this->emprunt;
-    }
-
-    /**
-     * Set reservation
-     *
-     * @param \mediathequeBundle\Entity\Reservation $reservation
-     *
-     * @return Utilisateurs
-     */
-    public function setReservation(\mediathequeBundle\Entity\Reservation $reservation = null) {
-        $this->reservation = $reservation;
-
-        return $this;
-    }
-
-    /**
-     * Get reservation
-     *
-     * @return \mediathequeBundle\Entity\Reservation
-     */
-    public function getReservation() {
-        return $this->reservation;
-    }
 
 }

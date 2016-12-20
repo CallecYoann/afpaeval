@@ -29,6 +29,16 @@ class Reservation
     private $id;
 
     /**
+     * @var \mediathequeBundle\Entity\Utilisateurs
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Utilisateurs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
+
+    /**
      * @var \mediathequeBundle\Entity\Ouvrage
      *
      * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Ouvrage")
@@ -37,8 +47,6 @@ class Reservation
      * })
      */
     private $ouvrage;
-
-
 
     /**
      * Set date
@@ -96,5 +104,29 @@ class Reservation
     public function getOuvrage()
     {
         return $this->ouvrage;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \mediathequeBundle\Entity\Utilisateurs $utilisateur
+     *
+     * @return Reservation
+     */
+    public function setUtilisateur(\mediathequeBundle\Entity\Utilisateurs $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \mediathequeBundle\Entity\Utilisateurs
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

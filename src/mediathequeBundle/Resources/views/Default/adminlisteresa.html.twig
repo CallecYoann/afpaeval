@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    
+    <div class="conteneurlisteresa">
+    <h3>Liste des réservations</h3>
+    
+    {% for adminlisteresa in adminlisteresas %}
+        <p>{{adminlisteresa.ouvrage.titre}} - réservé par {{adminlisteresa.utilisateur}}</p>
+     
+            
+     {% endfor %}      
+    </div>
+{% endblock %}    

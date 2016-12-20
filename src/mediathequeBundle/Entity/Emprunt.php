@@ -52,7 +52,15 @@ class Emprunt
      */
     private $ouvrage;
 
-
+    /**
+     * @var \mediathequeBundle\Entity\Utilisateurs
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Utilisateurs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
 
     /**
      * Set titre
@@ -158,5 +166,29 @@ class Emprunt
     public function getOuvrage()
     {
         return $this->ouvrage;
+    }
+
+    /**
+     * Set utilisateur
+     *
+     * @param \mediathequeBundle\Entity\Utilisateurs $utilisateur
+     *
+     * @return Emprunt
+     */
+    public function setUtilisateur(\mediathequeBundle\Entity\Utilisateurs $utilisateur = null)
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * Get utilisateur
+     *
+     * @return \mediathequeBundle\Entity\Utilisateurs
+     */
+    public function getUtilisateur()
+    {
+        return $this->utilisateur;
     }
 }

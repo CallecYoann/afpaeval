@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 19, 2016 at 04:55 PM
+-- Generation Time: Dec 20, 2016 at 04:54 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -71,7 +71,8 @@ CREATE TABLE `emprunt` (
   `titre` varchar(200) NOT NULL,
   `ouvrage_id` int(11) DEFAULT NULL,
   `date_retour` date NOT NULL,
-  `date_emprunt` date NOT NULL
+  `date_emprunt` date NOT NULL,
+  `utilisateur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,16 +130,17 @@ INSERT INTO `ouvrage` (`id`, `titre`, `annee`, `date`) VALUES
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `ouvrage_id` int(11) DEFAULT NULL
+  `ouvrage_id` int(11) DEFAULT NULL,
+  `utilisateur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `date`, `ouvrage_id`) VALUES
-(1, '2016-12-15', 4),
-(2, '2016-12-16', 8);
+INSERT INTO `reservation` (`id`, `date`, `ouvrage_id`, `utilisateur_id`) VALUES
+(4, '2016-12-20', 2, 1),
+(14, '2016-12-20', 6, 1);
 
 -- --------------------------------------------------------
 
@@ -150,8 +152,6 @@ CREATE TABLE `utilisateurs` (
   `id` int(11) NOT NULL,
   `nom` varchar(250) DEFAULT NULL,
   `prenom` varchar(250) DEFAULT NULL,
-  `emprunt_id` int(11) DEFAULT NULL,
-  `reservation_id` int(11) DEFAULT NULL,
   `username` varchar(180) NOT NULL,
   `username_canonical` varchar(180) NOT NULL,
   `email` varchar(180) NOT NULL,
@@ -169,8 +169,9 @@ CREATE TABLE `utilisateurs` (
 -- Dumping data for table `utilisateurs`
 --
 
-INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `emprunt_id`, `reservation_id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'bababa', 'bababa', NULL, NULL, 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-19 15:51:11', NULL, NULL, 'a:0:{}');
+INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
+(1, 'bababa', 'bababa', 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-20 15:59:14', NULL, NULL, 'a:0:{}'),
+(2, NULL, NULL, 'adminuser', 'adminuser', 'root@root.com', 'root@root.com', 1, NULL, '$2y$13$m8qh1i4rWJWeE57.CIwOIumiNg7znHBk.vpq/RRLxc28fPiIuEWpG', '2016-12-20 16:51:02', NULL, NULL, 'a:2:{i:0;s:16:"ROLE_SUPER_ADMIN";i:1;s:10:"ROLE_ADMIN";}');
 
 --
 -- Indexes for dumped tables
@@ -195,7 +196,8 @@ ALTER TABLE `cd`
 --
 ALTER TABLE `emprunt`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ouvrage_id` (`ouvrage_id`);
+  ADD KEY `ouvrage_id` (`ouvrage_id`),
+  ADD KEY `IDX_364071D7FB88E14F` (`utilisateur_id`);
 
 --
 -- Indexes for table `livre`
@@ -216,7 +218,8 @@ ALTER TABLE `ouvrage`
 --
 ALTER TABLE `reservation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `ouvrage_id` (`ouvrage_id`);
+  ADD KEY `ouvrage_id` (`ouvrage_id`),
+  ADD KEY `IDX_42C84955FB88E14F` (`utilisateur_id`);
 
 --
 -- Indexes for table `utilisateurs`
@@ -225,9 +228,7 @@ ALTER TABLE `utilisateurs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_497B315E92FC23A8` (`username_canonical`),
   ADD UNIQUE KEY `UNIQ_497B315EA0D96FBF` (`email_canonical`),
-  ADD UNIQUE KEY `UNIQ_497B315EC05FB297` (`confirmation_token`),
-  ADD KEY `emprunt_id` (`emprunt_id`),
-  ADD KEY `reservation_id` (`reservation_id`);
+  ADD UNIQUE KEY `UNIQ_497B315EC05FB297` (`confirmation_token`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -262,12 +263,12 @@ ALTER TABLE `ouvrage`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `utilisateurs`
 --
 ALTER TABLE `utilisateurs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
@@ -288,7 +289,8 @@ ALTER TABLE `cd`
 -- Constraints for table `emprunt`
 --
 ALTER TABLE `emprunt`
-  ADD CONSTRAINT `FK_364071D715D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
+  ADD CONSTRAINT `FK_364071D715D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`),
+  ADD CONSTRAINT `FK_364071D7FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`);
 
 --
 -- Constraints for table `livre`
@@ -300,14 +302,8 @@ ALTER TABLE `livre`
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD CONSTRAINT `FK_42C8495515D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`);
-
---
--- Constraints for table `utilisateurs`
---
-ALTER TABLE `utilisateurs`
-  ADD CONSTRAINT `FK_497B315EAE7FEF94` FOREIGN KEY (`emprunt_id`) REFERENCES `emprunt` (`id`),
-  ADD CONSTRAINT `FK_497B315EB83297E7` FOREIGN KEY (`reservation_id`) REFERENCES `reservation` (`id`);
+  ADD CONSTRAINT `FK_42C8495515D884B5` FOREIGN KEY (`ouvrage_id`) REFERENCES `ouvrage` (`id`),
+  ADD CONSTRAINT `FK_42C84955FB88E14F` FOREIGN KEY (`utilisateur_id`) REFERENCES `utilisateurs` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

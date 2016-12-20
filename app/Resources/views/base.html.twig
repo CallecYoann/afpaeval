@@ -19,13 +19,16 @@
 
             <nav>
                 <ul>
-                    <a href="{{path("mediatheque_homepage")}}"><li>Accueil</li></a>
-                    <a href="{{path("mediatheque_listereservation")}}"><li>Réservation</li></a>
+                    <a href="/"><li>Accueil</li></a>
                     <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
                     <a href="#evenements"><li>Evenements</li></a>
-                            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            {% if is_granted("ROLE_USER") %}
+                        <a href="{{path("mediatheque_mesreservations")}}"><li>Mes Réservations</li></a>
+                        {% if is_granted("ROLE_ADMIN") %}
+                            <a href="/listeresa"><li>Liste des réservations</li></a>
+                            {% else %}
+                            {% endif %}
                         <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
-                        <p>Bienvenue {{loggedUser}}</p>
                             {% else %}
                         <a href="#" id="connexionLink"><li>Se connecter</li></a>
                         <div id=modalConnexion class="modal">

@@ -52,6 +52,119 @@ class Emprunt
      */
     private $ouvrage;
 
+    /**
+     * @var \mediathequeBundle\Entity\Utilisateurs
+     *
+     * @ORM\ManyToOne(targetEntity="mediathequeBundle\Entity\Utilisateurs")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="utilisateur_id", referencedColumnName="id")
+     * })
+     */
+    private $utilisateur;
 
+    /**
+     * Set titre
+     *
+     * @param string $titre
+     *
+     * @return Emprunt
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+
+        return $this;
+    }
+
+    /**
+     * Get titre
+     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * Set dateRetour
+     *
+     * @param \DateTime $dateRetour
+     *
+     * @return Emprunt
+     */
+    public function setDateRetour($dateRetour)
+    {
+        $this->dateRetour = $dateRetour;
+
+        return $this;
+    }
+
+    /**
+     * Get dateRetour
+     *
+     * @return \DateTime
+     */
+    public function getDateRetour()
+    {
+        return $this->dateRetour;
+    }
+
+    /**
+     * Set dateEmprunt
+     *
+     * @param \DateTime $dateEmprunt
+     *
+     * @return Emprunt
+     */
+    public function setDateEmprunt($dateEmprunt)
+    {
+        $this->dateEmprunt = $dateEmprunt;
+
+        return $this;
+    }
+
+    /**
+     * Get dateEmprunt
+     *
+     * @return \DateTime
+     */
+    public function getDateEmprunt()
+    {
+        return $this->dateEmprunt;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set ouvrage
+     *
+     * @param \mediathequeBundle\Entity\Ouvrage $ouvrage
+     *
+     * @return Emprunt
+     */
+    public function setOuvrage(\mediathequeBundle\Entity\Ouvrage $ouvrage = null)
+    {
+        $this->ouvrage = $ouvrage;
+
+        return $this;
+    }
+
+    /**
+     * Get ouvrage
+     *
+     * @return \mediathequeBundle\Entity\Ouvrage
+     */
+    public function getOuvrage()
+    {
+        return $this->ouvrage;
+    }
 }
-
