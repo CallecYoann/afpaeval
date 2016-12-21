@@ -21,13 +21,14 @@
                 <ul>
                     <a href="/"><li>Accueil</li></a>
                     <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
-                    <a href="#evenements"><li>Evenements</li></a>
+                    <a href="/evenements"><li>Evenements</li></a>
                             {% if is_granted("ROLE_USER") %}
                         <a href="{{path("mediatheque_mesreservations")}}"><li>Mes Réservations</li></a>
-                        {% if is_granted("ROLE_ADMIN") %}
+                        <a href="/listeemprunt"><li>Mes Emprunts</li></a>
+                                {% if is_granted("ROLE_ADMIN") %}
                             <a href="/listeresa"><li>Liste des réservations</li></a>
-                            {% else %}
-                            {% endif %}
+                                {% else %}
+                                {% endif %}
                         <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
                             {% else %}
                         <a href="#" id="connexionLink"><li>Se connecter</li></a>
@@ -53,6 +54,8 @@
 
     {% block body %}{% endblock %}
 
+
+
     <footer>
         <p>Posted by: Callec Yoann</p>
         <p>Mairie - Square Anne de Bretagne - 29410 Pleyber-Christ</p>
@@ -66,10 +69,10 @@
                 $('nav ul').toggleClass('showing');
             });
 
-            </script>
+        </script>
 
-            <script>
-                
+        <script>
+
             //Connexion modal window 
             var modal = document.getElementById('modalConnexion');
             var link = document.getElementById("connexionLink");

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+
+
+{% block body %}
+
+    <div id='pouet'>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        var xhr = new XMLHttpRequest(); //connexion à AJAX
+        xhr.open("GET", " /api_evenements", true); //on ouvre la connexion en GET sur le lien api_evenements
+        xhr.onload = function (e) { //Quand la co est établie l'évènement se lance.
+            if (xhr.readyState === 4) { //Bonne connexion
+                if (xhr.status === 200) { //La connexion s'est bien passée.
+                    console.log(xhr.responseText);
+
+                    document.getElementById("pouet").innerHTML = xhr.responseText;
+                    
+
+                } else {
+                    console.error(xhr.statusText);
+                }
+            }
+        };
+        xhr.onerror = function (e) {
+            console.error(xhr.statusText);
+        };
+        xhr.send(null);
+    </script>
+
+{% endblock %}

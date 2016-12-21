@@ -12,12 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Emprunt
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="titre", type="string", length=200, nullable=false)
-     */
-    private $titre;
 
     /**
      * @var \DateTime
@@ -62,29 +56,6 @@ class Emprunt
      */
     private $utilisateur;
 
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     *
-     * @return Emprunt
-     */
-    public function setTitre($titre)
-    {
-        $this->titre = $titre;
-
-        return $this;
-    }
-
-    /**
-     * Get titre
-     *
-     * @return string
-     */
-    public function getTitre()
-    {
-        return $this->titre;
-    }
 
     /**
      * Set dateRetour

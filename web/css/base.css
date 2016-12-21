@@ -122,15 +122,15 @@ nav ul li:hover {
 }
 
 .BDh3, .CDh3, .Livreh3 {
-     background: -moz-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* ff3.6+ */
-background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(50%, rgba(255,255,255,1)), color-stop(100%, rgba(0,0,0,1))); /* safari4+,chrome */
-background: -webkit-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* safari5.1+,chrome10+ */
-background: -o-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* opera 11.10+ */
-background: -ms-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* ie10+ */
-background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* w3c */ 
-padding: 8px 0 8px 0;
-text-align: center;
-margin: 0;
+    background: -moz-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(0,0,0,1)), color-stop(50%, rgba(255,255,255,1)), color-stop(100%, rgba(0,0,0,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* ie10+ */
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(255,255,255,1) 50%, rgba(0,0,0,1) 100%); /* w3c */ 
+    padding: 8px 0 8px 0;
+    text-align: center;
+    margin: 0;
 
 }
 
@@ -154,7 +154,7 @@ table, th, td {
     width: 30%;
     float: left;
     text-align: center;
-    
+
 }
 
 .inforight {
@@ -191,6 +191,9 @@ footer {
     text-align: center;
 }
 
+.conteneurlisteemprunt {
+    text-align: center;
+}
 
 @media screen and (max-width: 580px) {
     nav ul {
@@ -208,22 +211,22 @@ footer {
     .handle {
         display: block;
     }
-    
+
     .imageleft {
-    width: auto;
-    float: none;
-    text-align: center;
-    border-top: 2px solid black;
-    padding: 15px; 
-}
-    
+        width: auto;
+        float: none;
+        text-align: center;
+        border-top: 2px solid black;
+        padding: 15px; 
+    }
+
     .inforight {
-    width: 100%;
-    font-size: 12px;
-    text-align: center;
-    margin-left: 0;
-    height: 135px;
-}
+        width: 100%;
+        font-size: 12px;
+        text-align: center;
+        margin-left: 0;
+        height: 135px;
+    }
 
 }
 

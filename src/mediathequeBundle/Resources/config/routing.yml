@@ -6,9 +6,6 @@ mediatheque_nouveaute:
     path:    /nouveaute
     defaults: { _controller: mediathequeBundle:Default:listenouveaute }
 
-mediatheque_evenements:
-    path:    /evenements
-
 mediatheque_reservation:
     path:    /reservation
     defaults: {_controller: mediathequeBundle:Default:reservation }
@@ -24,3 +21,16 @@ mediatheque_adminspace:
 mediatheque_confirmemprunt:
     path:    /confirmemprunt
     defaults: {_controller: mediathequeBundle:Default:Emprunt }
+    
+mediatheque_listeemprunt:
+    path:    /listeemprunt
+    defaults: {_controller: mediathequeBundle:Default:listeEmprunt }
+    
+mediatheque_api_evenements:
+    path:    /api_evenements
+    defaults: {_controller: mediathequeBundle:Default:api_evenements }
+    
+mediatheque_evenements:
+    path:    /evenements
+    defaults: {_controller: mediathequeBundle:Default:evenements }    
+    

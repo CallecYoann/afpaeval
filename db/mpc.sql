@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 20, 2016 at 04:54 PM
+-- Generation Time: Dec 21, 2016 at 04:57 PM
 -- Server version: 5.7.16-0ubuntu0.16.04.1
 -- PHP Version: 7.0.8-0ubuntu0.16.04.3
 
@@ -68,12 +68,41 @@ INSERT INTO `cd` (`id`, `ouvrage_id`, `image`, `artiste`) VALUES
 
 CREATE TABLE `emprunt` (
   `id` int(11) NOT NULL,
-  `titre` varchar(200) NOT NULL,
   `ouvrage_id` int(11) DEFAULT NULL,
   `date_retour` date NOT NULL,
   `date_emprunt` date NOT NULL,
   `utilisateur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `emprunt`
+--
+
+INSERT INTO `emprunt` (`id`, `ouvrage_id`, `date_retour`, `date_emprunt`, `utilisateur_id`) VALUES
+(2, 6, '2016-12-31', '2016-12-21', 2),
+(8, 2, '2016-12-31', '2016-12-21', 1),
+(9, 6, '2016-12-31', '2016-12-21', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `evenements`
+--
+
+CREATE TABLE `evenements` (
+  `id` int(11) NOT NULL,
+  `titre` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8_unicode_ci NOT NULL,
+  `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `evenements`
+--
+
+INSERT INTO `evenements` (`id`, `titre`, `description`, `date`) VALUES
+(1, 'Repas de Noel', 'Repas de Noel organisé le 24 décembre au soir !\r\nVenez nombreux !', '2016-12-24 20:00:00'),
+(2, 'Nouvel an Lecture', 'La médiathèque vous convie à sa soirée nouvel an lecture !\r\nSans alcool la fête est plus folle !', '2016-12-31 20:00:00');
 
 -- --------------------------------------------------------
 
@@ -139,8 +168,8 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `date`, `ouvrage_id`, `utilisateur_id`) VALUES
-(4, '2016-12-20', 2, 1),
-(14, '2016-12-20', 6, 1);
+(18, '2016-12-21', 1, 1),
+(19, '2016-12-21', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -170,8 +199,8 @@ CREATE TABLE `utilisateurs` (
 --
 
 INSERT INTO `utilisateurs` (`id`, `nom`, `prenom`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `confirmation_token`, `password_requested_at`, `roles`) VALUES
-(1, 'bababa', 'bababa', 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-20 15:59:14', NULL, NULL, 'a:0:{}'),
-(2, NULL, NULL, 'adminuser', 'adminuser', 'root@root.com', 'root@root.com', 1, NULL, '$2y$13$m8qh1i4rWJWeE57.CIwOIumiNg7znHBk.vpq/RRLxc28fPiIuEWpG', '2016-12-20 16:51:02', NULL, NULL, 'a:2:{i:0;s:16:"ROLE_SUPER_ADMIN";i:1;s:10:"ROLE_ADMIN";}');
+(1, 'bababa', 'bababa', 'bababa', 'bababa', 'ba@ba.ba', 'ba@ba.ba', 1, NULL, '$2y$13$TpTcn.6gh7m4SdU0ydzlO.ckh0S1HJB5T18PH5QG5HWU7RfMD286C', '2016-12-21 12:09:08', NULL, NULL, 'a:0:{}'),
+(2, NULL, NULL, 'adminuser', 'adminuser', 'root@root.com', 'root@root.com', 1, NULL, '$2y$13$m8qh1i4rWJWeE57.CIwOIumiNg7znHBk.vpq/RRLxc28fPiIuEWpG', '2016-12-21 14:23:55', NULL, NULL, 'a:2:{i:0;s:16:"ROLE_SUPER_ADMIN";i:1;s:10:"ROLE_ADMIN";}');
 
 --
 -- Indexes for dumped tables
@@ -198,6 +227,12 @@ ALTER TABLE `emprunt`
   ADD PRIMARY KEY (`id`),
   ADD KEY `ouvrage_id` (`ouvrage_id`),
   ADD KEY `IDX_364071D7FB88E14F` (`utilisateur_id`);
+
+--
+-- Indexes for table `evenements`
+--
+ALTER TABLE `evenements`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `livre`
@@ -248,7 +283,12 @@ ALTER TABLE `cd`
 -- AUTO_INCREMENT for table `emprunt`
 --
 ALTER TABLE `emprunt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `evenements`
+--
+ALTER TABLE `evenements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `livre`
 --
@@ -263,7 +303,7 @@ ALTER TABLE `ouvrage`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `utilisateurs`
 --
