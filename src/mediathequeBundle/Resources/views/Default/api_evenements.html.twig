@@ -1,3 +1,5 @@
 {% for evenement in evenements %}
-       {{evenement.titre}} {{evenement.description}}          
+    <h3>{{evenement.titre}}</h3>
+    <p>{{evenement.description}}  </p>        
+    <p>Rendez vous le {{evenement.date|date("Y-m-d")}}</p>
 {% endfor %}

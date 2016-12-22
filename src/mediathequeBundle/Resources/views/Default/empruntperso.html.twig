@@ -11,7 +11,7 @@
 
         {% for mesemprunt in mesemprunts %}
             <p>{{mesemprunt.ouvrage.titre}} - emprunté le {{mesemprunt.dateEmprunt|date('Y-m-d')}}.</p>
-            <p>Date de retour prévue le  {{mesemprunt.dateRetour|date('Y-m-d')}} - réservé par {{mesemprunt.utilisateur}}</p>
+            <p>Date de retour prévue le  {{mesemprunt.dateRetour|date('Y-m-d')}}</p>
             <br><br>
 
         {% endfor %}

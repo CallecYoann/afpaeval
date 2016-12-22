@@ -44,6 +44,13 @@ class Cd
      * @ORM\Column(name="artiste", type="string", length=250, nullable=false)
      */
     private $artiste;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=false)
+     */
+    private $date;
 
     /**
      * Get id
@@ -125,5 +132,29 @@ class Cd
     public function getArtiste()
     {
         return $this->artiste;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Cd
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
     }
 }

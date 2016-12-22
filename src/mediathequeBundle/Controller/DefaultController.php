@@ -10,31 +10,40 @@ use mediathequeBundle\Entity\Emprunt;
 
 class DefaultController extends Controller {
 
-    //Afficher tout les ouvrages.
+    //Renvoi de la vue de l'index.
     public function indexAction() {
-        $em = $this->getDoctrine()->getManager();
 
-        $ouvrages = $em->getRepository('mediathequeBundle:Ouvrage')->findAll();
-
-        $loggedUser = $this->getUser();
-
-        return $this->render('mediathequeBundle:Default:index.html.twig', array('Ouvrages' => $ouvrages, 'loggedUser' => $loggedUser));
+        return $this->render('mediathequeBundle:Default:index.html.twig');
     }
 
-    //Afficher les nouveautés.
+    //Afficher les nouveautés(catalogue trié)
     public function listenouveauteAction() {
         $em = $this->getDoctrine()->getManager();
 
-        $repobds = $em->getRepository('mediathequeBundle:Bd')->findAll();
-        $repocds = $em->getRepository('mediathequeBundle:Cd')->findAll();
-        $repolivres = $em->getRepository('mediathequeBundle:Livre')->findAll();
-
-        $loggedUser = $this->getUser();
-
-        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('repobds' => $repobds, 'repocds' => $repocds, 'repolivres' => $repolivres, 'loggedUser' => $loggedUser
+        $repobds = $em->getRepository('mediathequeBundle:Bd')->findBy([], ['date' => 'DESC']);
+        $repocds = $em->getRepository('mediathequeBundle:Cd')->findBy([], ['date' => 'DESC']);
+        $repolivres = $em->getRepository('mediathequeBundle:Livre')->findBy([], ['date' => 'DESC']);
+        
+        $libres = $em->getRepository('mediathequeBundle:Reservation')->findAll();
+        
+        return $this->render('mediathequeBundle:Default:nouveaute.html.twig', array('repobds' => $repobds, 'repocds' => $repocds, 'repolivres' => $repolivres, 'libres' => $libres,
         ));
     }
 
+    //Affichage du catalogue.
+    public function catalogueAction() {
+        $em = $this->getDoctrine()->getManager();
+
+        $cataloguebds = $em->getRepository('mediathequeBundle:Bd')->findAll();
+        $cataloguecds = $em->getRepository('mediathequeBundle:Cd')->findAll();
+        $cataloguelivres = $em->getRepository('mediathequeBundle:Livre')->findAll();
+        
+        $disponibilites = $em->getRepository('mediathequeBundle:Reservation')->findAll();
+        
+        return $this->render('mediathequeBundle:Default:catalogue.html.twig', array('cataloguebds' => $cataloguebds, 'cataloguecds' => $cataloguecds, 'cataloguelivres' => $cataloguelivres, 'disponibilites' => $disponibilites,
+        ));
+    }
+    
     //Système de réservation.
     public function reservationAction(Request $request) {
 
@@ -65,9 +74,8 @@ class DefaultController extends Controller {
 
         $mesreservations = $em->getRepository('mediathequeBundle:Reservation')->findByUtilisateur($this->getUser());
 
-        $loggedUser = $this->getUser();
-
-        return $this->render('mediathequeBundle:Default:listeresa.html.twig', array('mesreservations' => $mesreservations, 'loggedUser' => $loggedUser));
+        return $this->render('mediathequeBundle:Default:resaperso.html.twig', array('mesreservations' => $mesreservations,
+            ));
     }
 
     //Liste des réservations côté administrateur.
@@ -75,11 +83,10 @@ class DefaultController extends Controller {
 
        $em = $this->getDoctrine()->getManager();
 
-       $loggedUser = $this->getUser();
-
         $adminlisteresas = $em->getRepository('mediathequeBundle:Reservation')->findAll();
 
-        return $this->render('mediathequeBundle:Default:adminlisteresa.html.twig', array('adminlisteresas' => $adminlisteresas, 'loggedUser' => $loggedUser));
+        return $this->render('mediathequeBundle:Default:adminlisteresa.html.twig', array('adminlisteresas' => $adminlisteresas,
+            ));
     }
 
     //Système de validation d'emprunt et d'écrasement de réservation.
@@ -91,7 +98,7 @@ class DefaultController extends Controller {
          $empruntdate = new \DateTime();
          $intervaldate = new \DateInterval('P10D');
          $retourdate = $empruntdate->add($intervaldate);
-           
+            
          $id = $request->get('id'); 
          
          $reservation_object = $em->getRepository('mediathequeBundle:Reservation')->findOneby(array('id' => $id));
@@ -112,7 +119,7 @@ class DefaultController extends Controller {
      }
      
      //Afficher la liste des emprunts par utilisateur connecté.
-     public function listeempruntAction() {
+     public function empruntPersoAction() {
 
        $em = $this->getDoctrine()->getManager();
 
@@ -120,7 +127,7 @@ class DefaultController extends Controller {
 
        $mesemprunts = $em->getRepository('mediathequeBundle:Emprunt')->findByUtilisateur(array('id' => $loggedUser ));
 
-        return $this->render('mediathequeBundle:Default:listeemprunt.html.twig', array('mesemprunts' => $mesemprunts, 'loggedUser' => $loggedUser));
+        return $this->render('mediathequeBundle:Default:empruntperso.html.twig', array('mesemprunts' => $mesemprunts, 'loggedUser' => $loggedUser));
     }
      
      public function evenementsAction() {
@@ -132,13 +139,20 @@ class DefaultController extends Controller {
      public function api_evenementsAction() {
 
        $em = $this->getDoctrine()->getManager();
-
-       $loggedUser = $this->getUser()->getId('id');
-
+       
        $evenements = $em->getRepository('mediathequeBundle:Evenements')->findAll();
 
-        return $this->render('mediathequeBundle:Default:api_evenements.html.twig', array('evenements' => $evenements, 'loggedUser' => $loggedUser));
-    
+        return $this->render('mediathequeBundle:Default:api_evenements.html.twig', array('evenements' => $evenements,));
 }
 
+        public function listeempruntAction() {
+
+       $em = $this->getDoctrine()->getManager();
+     
+       $listeemprunts = $em->getRepository('mediathequeBundle:Emprunt')->findAll();
+
+        return $this->render('mediathequeBundle:Default:adminlisteemprunt.html.twig', array('listeemprunts' => $listeemprunts,
+            ));
+
+        }
 }

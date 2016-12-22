@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+    <div class="conteneurresa">
+        <div class="resa">
+            <h3>Liste de mes réservations :</h3><br>
+
+            
+                    {% for mesreservation in mesreservations %}
+                        <p>{{ mesreservation.ouvrage.titre }}</p>
+                        <p>{{mesreservation.date|date('Y-m-d')}}</p>
+                    {% endfor %} 
+            
+{% endblock %}

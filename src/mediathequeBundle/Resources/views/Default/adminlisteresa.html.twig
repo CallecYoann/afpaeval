@@ -10,7 +10,7 @@
         {% for adminlisteresa in adminlisteresas %}
             <p>{{adminlisteresa.ouvrage.titre}} - réservé par {{adminlisteresa.utilisateur}}</p>
             <a href ="{{ path("mediatheque_confirmemprunt",  {'id': adminlisteresa.id})}}">--> Valider l'emprunt <--</a>
-
         {% endfor %}
     </div>
+        
 {% endblock %}

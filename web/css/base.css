@@ -80,7 +80,7 @@ nav ul li:hover {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    padding-top: 190px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -94,7 +94,7 @@ nav ul li:hover {
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 5px;
+    padding: 10px;
     border: 1px solid #888;
     width: 45%;
 }
@@ -195,12 +195,24 @@ footer {
     text-align: center;
 }
 
+#listeevents {
+    text-align: center;
+}
+
+#resalinkcd, #resalinklivre, #resalinkbd {
+    color: red;
+}
+
+.wrapperBD {
+    padding-bottom: 15px;
+}
+
 @media screen and (max-width: 580px) {
     nav ul {
         max-height: 0;
     }
     .showing {
-        max-height: 20em;
+        max-height: 24.5em;
     }
     nav ul li {
         box-sizing: border-box;
@@ -230,69 +242,3 @@ footer {
 
 }
 
-
-
-
-
-
-/*.centerpanel {
-    display:flex;
-    align-items: center;
-}
-
-.left{
-    margin: auto;
-}
-
-.right {
-    margin: auto;
-}
-
-
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #333333;
-    margin: 0;
-    padding: 0;
-    font-size: 0.8em;
-    color: #FFBB0F;
-}
-
-
-
-.newsbd, .newslivre, .newscd, .resa {
-    text-align: center;
-    margin: auto;
-}
-
-.section {
-    width: 80%;
-    height: 200px;
-    background: aqua;
-    margin: auto;
-}
-
-.one {
-    width: 50%;
-    height: 200px;
-    background: -webkit-linear-gradient(left, #FFBC0F , #878C95);
-    float: left;
-    text-align: center;
-}
-
-.two {
-    margin-left: 50%;
-    height: 200px;
-    background: -webkit-linear-gradient(left, #878C95 , #FFBC0F);
-    text-align: center;
-    font-size: 0.8em;
-}
-
-.conteneurresa {
-    width: 80%;
-    margin: 0 auto;
-    padding: 0 0 80px;
-}*/

@@ -13,10 +13,22 @@
                 <div class="wrapperBD">
                     <div class="imageleft"><img src="{{ repobd.image }}" height="190" width="150"></i></div>
                     <div class="inforight">
-                        <p>Titre : {{repobd.ouvrage.titre }}</p>
-                        <p>Année : {{ repobd.ouvrage.annee }}</p>
-                        <p>Date d'entrée médiathèque : {% if repobd.ouvrage.date %}{{ repobd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
-                        <a href ="{{ path("mediatheque_reservation",  {'id': repobd.ouvrage.id })}}">--> Réserver <--</a>
+                        <p><b>Titre :</b> {{repobd.ouvrage.titre }}</p>
+                        <p><b>Auteur:</b> {{repobd.auteur}}</p>
+                        <p><b>Année de parution :</b> {{ repobd.ouvrage.annee }}</p>
+                        <p><b>Date d'entrée médiathèque :</b> {% if repobd.date %}{{ repobd.date|date("Y-m-d") }}{% endif %}</p>
+                        
+                        {% set reservable = false %} {# on initalise une variable à faux(on ne sait pas si elle est réservée #}
+                        {% for libre in libres %}
+                            {% if libre.ouvrage == repobd.ouvrage %} {# Si les 2 id d'ouvrages correspondent entre table relation et table ouvrage #}
+                                {% set reservable = true %}{# Alors la variable est vraie#}
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                        <b><a href ="{{ path("mediatheque_reservation",  {'id': repobd.ouvrage.id })}}" id="resalinkbd">--> Réserver <--</a></b>
+                        {% endif %}
                     </div>
                     
                 {% endfor %}   
@@ -32,11 +44,22 @@
             <div class="wrapperCD">   
                 <div class="imageleft"><img src="{{ repocd.image }}" height="150" width="150"></i></div>
                 <div class="inforight">
-                    <p>Titre : {{ repocd.ouvrage.titre }}</p>
-                    <p>Artiste : {{ repocd.artiste }}</p>
-                    <p>Année : {{ repocd.ouvrage.annee }}</p>
-                    <p>Date d'entrée médiathèque : {% if repocd.ouvrage.date %}{{ repocd.ouvrage.date|date('Y-m-d') }}{% endif %}</p>
-                    <a href ="{{ path("mediatheque_reservation",  {'id': repocd.ouvrage.id })}}">--> Réserver <--</a>
+                    <p><b>Titre :</b> {{ repocd.ouvrage.titre }}</p>
+                    <p><b>Artiste :</b> {{ repocd.artiste }}</p>
+                    <p><b>Année de parution :</b> {{ repocd.ouvrage.annee }}</p>
+                    <p><b>Date d'entrée médiathèque :</b> {% if repocd.date %}{{ repocd.date|date('Y-m-d') }}{% endif %}</p>
+                    
+                    {% set reservable = false %} {# on initalise une variable à faux(on ne sait pas si elle est réservée #}
+                        {% for libre in libres %}
+                            {% if libre.ouvrage == repocd.ouvrage %} {# Si les 2 id d'ouvrages correspondent entre table relation et table ouvrage #}
+                                {% set reservable = true %}{# Alors la variable est vraie#}
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                    <b><a href ="{{ path("mediatheque_reservation",  {'id': repocd.ouvrage.id })}}" id="resalinkcd">--> Réserver <--</a></b>
+                    {% endif %}
                 </div>
                  
             {% endfor %}   
@@ -50,11 +73,21 @@
              <div class="wrapperLivre">   
                  <div class="imageleft"><img src="{{ repolivre.image }}" height="190" width="150"></i></div>
                  <div class="inforight">
-                     <p>{{ repolivre.ouvrage.titre }}</p>
-                     <p>{{ repolivre.ouvrage.annee }}</p>
-                     <p>Date d'entrée médiathèque : {% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %} </p>
-                     <a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}">--> Réserver <--  </a>
-                         {#<td><button type="submit" src="{{ ouvrage_livre.ouvrage.id }}">OK</button></td>#}
+                     <p><b>Titre :</b> {{ repolivre.ouvrage.titre }}</p>
+                     <p><b>Auteur:</b> {{ repolivre.auteur }}</p>
+                     <p><b>Année de parution :</b> {{ repolivre.ouvrage.annee }}</p>
+                     <p><b>Date d'entrée médiathèque :</b> {% if repolivre.ouvrage.date %}{{ repolivre.ouvrage.date|date('Y-m-d') }}{% endif %} </p>
+                     {% set reservable = false %} {# on initalise une variable à faux(on ne sait pas si elle est réservée #}
+                        {% for libre in libres %}
+                            {% if libre.ouvrage == repolivre.ouvrage %} {# Si les 2 id d'ouvrages correspondent entre table relation et table ouvrage #}
+                                {% set reservable = true %}{# Alors la variable est vraie#}
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                     <b><a href ="{{ path("mediatheque_reservation",  {'id': repolivre.ouvrage.id })}}" id="resalinklivre">--> Réserver <--  </a></b>
+                        {% endif %}
                  </div>
              {% endfor %}   
 

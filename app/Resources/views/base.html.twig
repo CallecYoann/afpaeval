@@ -20,13 +20,15 @@
             <nav>
                 <ul>
                     <a href="/"><li>Accueil</li></a>
-                    <a href="{{path("mediatheque_nouveaute")}}"><li>Nouveautés</li></a>
+                    <a href="/catalogue"><li>Catalogue</li></a>
+                    <a href="/nouveaute"><li>Nouveautés</li></a>
                     <a href="/evenements"><li>Evenements</li></a>
                             {% if is_granted("ROLE_USER") %}
-                        <a href="{{path("mediatheque_mesreservations")}}"><li>Mes Réservations</li></a>
-                        <a href="/listeemprunt"><li>Mes Emprunts</li></a>
+                        <a href="/resaperso"><li>Mes Réservations</li></a>
+                        <a href="/empruntperso"><li>Mes Emprunts</li></a>
                                 {% if is_granted("ROLE_ADMIN") %}
                             <a href="/listeresa"><li>Liste des réservations</li></a>
+                            <a href="/listeemprunt"><li>Liste des emprunts</li></a>
                                 {% else %}
                                 {% endif %}
                         <a href="{{ path('fos_user_security_logout') }}"><li>Se déconnecter</li></a>
@@ -37,8 +39,8 @@
                                 <span class="close">&times;</span>
                                 <form action="{{ path("fos_user_security_check") }}" method="post">
                                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                                    <label for="username"><input class="usernameinput" type="text" id="username" name="_username" placeholder="Utilisateur" required="required" size="8"></label>
-                                    <label for="password"><input type="password" id="password" name="_password" placeholder="Mot de passe" required="required" size="8"></label>
+                                    <label for="username"><input class="usernameinput" type="text" id="username" name="_username" placeholder="Utilisateur" required="required" size="6"></label>
+                                    <label for="password"><input type="password" id="password" name="_password" placeholder="Mot de passe" required="required" size="6"></label>
                                     <label for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" value="on" hidden></label>
                                     <button type="submit" id="_submit" name="_submit""><span></span>Ok</button>
                                 </form>
@@ -69,9 +71,7 @@
                 $('nav ul').toggleClass('showing');
             });
 
-        </script>
 
-        <script>
 
             //Connexion modal window 
             var modal = document.getElementById('modalConnexion');

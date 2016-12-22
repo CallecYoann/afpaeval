@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Controller/DefaultController.php</file>
+            <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/views/Default/api_evenements.html.twig</file>
+            <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/views/Default/evenements.html.twig</file>
             <file>file:/home/callec/Bureau/afpaeval/web/css/base.css</file>
             <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/views/Default/adminlisteresa.html.twig</file>
-            <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/views/Default/nouveaute.html.twig</file>
-            <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Entity/Utilisateurs.php</file>
-            <file>file:/home/callec/Bureau/afpaeval/app/Resources/views/base.html.twig</file>
+            <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/views/Default/listeemprunt.html.twig</file>
             <file>file:/home/callec/Bureau/afpaeval/src/mediathequeBundle/Resources/config/routing.yml</file>
+            <file>file:/home/callec/Bureau/afpaeval/app/Resources/views/base.html.twig</file>
         </group>
     </open-files>
 </project-private>

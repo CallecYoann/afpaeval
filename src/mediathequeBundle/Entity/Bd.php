@@ -37,6 +37,20 @@ class Bd
      * @ORM\Column(name="image", type="string", length=250, nullable=false)
      */
     private $image;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="date", nullable=false)
+     */
+    private $date;
+    
+      /**
+     * @var string
+     *
+     * @ORM\Column(name="auteur", type="string", length=250, nullable=false)
+     */
+    private $auteur;
 
     /**
      * Get id
@@ -94,5 +108,53 @@ class Bd
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set date
+     *
+     * @param \DateTime $date
+     *
+     * @return Bd
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * Set auteur
+     *
+     * @param string $auteur
+     *
+     * @return Bd
+     */
+    public function setAuteur($auteur)
+    {
+        $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * Get auteur
+     *
+     * @return string
+     */
+    public function getAuteur()
+    {
+        return $this->auteur;
     }
 }

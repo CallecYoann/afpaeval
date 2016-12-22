@@ -2,20 +2,17 @@
 
 {% block stylesheets %}{% endblock %}
 
-
-
 {% block body %}
 
-    <div id='pouet'>
-
-    </div>
-
+    <div id='listeevents'></div>
 
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
 
     <script type="text/javascript">
+        
         var xhr = new XMLHttpRequest(); //connexion à AJAX
         xhr.open("GET", " /api_evenements", true); //on ouvre la connexion en GET sur le lien api_evenements
         xhr.onload = function (e) { //Quand la co est établie l'évènement se lance.
@@ -23,7 +20,7 @@
                 if (xhr.status === 200) { //La connexion s'est bien passée.
                     console.log(xhr.responseText);
 
-                    document.getElementById("pouet").innerHTML = xhr.responseText;
+                    document.getElementById("listeevents").innerHTML = xhr.responseText;
                     
 
                 } else {
@@ -35,6 +32,7 @@
             console.error(xhr.statusText);
         };
         xhr.send(null);
+        
     </script>
 
 {% endblock %}

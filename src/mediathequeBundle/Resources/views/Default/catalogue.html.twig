@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+
+    <div class="conteneurcatalogue">
+
+        <h3 class="BDh3">Section BD :</h3>
+
+        <div class="cataloguebd">
+
+            {% for cataloguebd in cataloguebds %}
+                <div class="wrapperBD">
+                    <div class="imageleft"><img src="{{ cataloguebd.image }}" height="190" width="150"></i></div>
+                    <div class="inforight">
+                        <p><b>Titre :</b> {{cataloguebd.ouvrage.titre }}</p>
+                        <p><b>Auteur:</b> {{cataloguebd.auteur}}</p>
+                        <p><b>Année de parution :</b> {{ cataloguebd.ouvrage.annee }}</p>
+                        <p><b>Date d'entrée médiathèque :</b> {% if cataloguebd.date %}{{ cataloguebd.date|date("Y-m-d") }}{% endif %}</p>
+
+                        {% set reservable = false %} {# on initalise une variable à faux(on ne sait pas si elle est réservée #}
+                        {% for disponibilite in disponibilites %}
+                            {% if disponibilite.ouvrage == cataloguebd.ouvrage %} {# Si les 2 id d'ouvrages correspondent entre table relation et table ouvrage #}
+                                {% set reservable = true %}{# Alors la variable est vraie#}
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                            <b><a href ="{{ path("mediatheque_reservation",  {'id': cataloguebd.ouvrage.id })}}" id="resalinkbd">--> Réserver <--</a></b>
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}   
+            </div>
+        </div>    
+
+        <h3 class="CDh3">Section CD :</h3>
+
+        <div class="cataloguecd">
+            {% for cataloguecd in cataloguecds %}
+                <div class="wrapperCD">   
+                    <div class="imageleft"><img src="{{ cataloguecd.image }}" height="150" width="150"></i></div>
+                    <div class="inforight">
+                        <p><b>Titre :</b> {{ cataloguecd.ouvrage.titre }}</p>
+                        <p><b>Artiste :</b> {{ cataloguecd.artiste }}</p>
+                        <p><b>Année de parution :</b> {{ cataloguecd.ouvrage.annee }}</p>
+                        <p><b>Date d'entrée médiathèque :</b> {% if cataloguecd.date %}{{ cataloguecd.date|date('Y-m-d') }}{% endif %}</p>
+                        
+                        {% set reservable = false %} 
+                        {% for disponibilite in disponibilites %}
+                            {% if disponibilite.ouvrage == cataloguecd.ouvrage %}
+                                {% set reservable = true %} 
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                        <b><a href ="{{ path("mediatheque_reservation",  {'id': cataloguecd.ouvrage.id })}}" id="resalinkcd">--> Réserver <--</a></b>
+                        {% endif %}
+                        
+                    </div>
+
+                {% endfor %}   
+            </div>
+        </div>
+
+        <h3 class="Livreh3">Section Livre :</h3>
+
+        <div class="cataloguelivre"
+             {% for cataloguelivre in cataloguelivres %}
+                 <div class="wrapperLivre">   
+                     <div class="imageleft"><img src="{{ cataloguelivre.image }}" height="190" width="150"></i></div>
+                     <div class="inforight">
+                         <p><b>Titre :</b> {{ cataloguelivre.ouvrage.titre }}</p>
+                         <p><b>Auteur:</b> {{ cataloguelivre.auteur }}</p>
+                         <p><b>Année de parution :</b> {{ cataloguelivre.ouvrage.annee }}</p>
+                         <p><b>Date d'entrée médiathèque :</b> {% if cataloguelivre.ouvrage.date %}{{ cataloguelivre.ouvrage.date|date('Y-m-d') }}{% endif %} </p>
+                         
+                         {% set reservable = false %} 
+                        {% for disponibilite in disponibilites %}
+                            {% if disponibilite.ouvrage == cataloguelivre.ouvrage %} 
+                                {% set reservable = true %} Alors la variable est vraie
+                            {% endif %}
+                        {% endfor %}
+                        {% if reservable %}
+                            <p>Non disponible</p>
+                        {% else %}
+                         <b><a href ="{{ path("mediatheque_reservation",  {'id': cataloguelivre.ouvrage.id })}}" id="resalinklivre">--> Réserver <--  </a></b>
+                         {% endif %}
+                     </div>
+                 {% endfor %}   
+
+             </div>
+        </div>
+
+    {% endblock %}
