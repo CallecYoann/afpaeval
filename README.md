@@ -4,7 +4,7 @@ git clone the project.
 
 install on the database (afpaeval/db/mpc.sql).
 
-execute 'composer install' for installing all the dependencies .
+execute composer install for installing all the dependencies .
 
 Enjoy.
 
